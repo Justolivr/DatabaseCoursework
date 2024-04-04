@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2024 at 11:44 AM
+-- Generation Time: Apr 04, 2024 at 03:55 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,8 +29,19 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `dsmanager` (
   `empID` int(6) NOT NULL,
-  `manID` int(6) NOT NULL
+  `manID` int(6) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dsmanager`
+--
+
+INSERT INTO `dsmanager` (`empID`, `manID`) VALUES
+(1, 5),
+(8, 1),
+(11, 2),
+(12, 4),
+(13, 3);
 
 --
 -- Indexes for dumped tables
@@ -42,6 +53,16 @@ CREATE TABLE `dsmanager` (
 ALTER TABLE `dsmanager`
   ADD PRIMARY KEY (`manID`),
   ADD KEY `empID` (`empID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `dsmanager`
+--
+ALTER TABLE `dsmanager`
+  MODIFY `manID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
