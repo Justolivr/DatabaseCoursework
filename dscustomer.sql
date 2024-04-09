@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2024 at 03:55 PM
+-- Generation Time: Apr 09, 2024 at 01:53 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -45,13 +45,13 @@ INSERT INTO `dscustomer` (`customerID`, `regNo`, `address`, `postcode`, `firstna
 (1, 'DC09YZQ', '4 Boot Hill Drive', 'ME87FD', 'Teresa', 'Wilkins', 217920370),
 (2, 'LO44REJ', '8 Tennyson Road', 'HP112XA', 'Merle', 'Herchs', 993099700),
 (3, 'VB02RQL', '5 Forest Lodge', 'TN3 9JP', 'Thomas', 'Castellano', 1317836167),
-(6, 'FO22FDY', '4 Romulus Court', 'HP112XA', 'Thomas', 'Castellano', 1872545189),
-(7, 'YF05DQR', '7 Mill Close', 'ME87FD', 'Thomas', 'Castellano', 2147483647),
-(8, 'YL31NLA', '31 Oaklands Crescent', 'CO153LL', 'Thomas', 'Castellano', 2147483647),
-(9, 'DR08XOQ', '7 Havenvale Court', 'DL117JY', 'Thomas', 'Castellano', 2147483647),
-(10, 'NX19YMD', '6 Mabel Cottages', 'LE191YG', 'Thomas', 'Castellano', 1292122052),
-(11, 'VV48LHM', '5 Queens Close', 'LS83TH', 'Thomas', 'Castellano', 2147483647),
-(12, 'YG11VOA', 'Roselands Lodge', 'BN228PT', 'Thomas', 'Castellano', 2147483647);
+(6, 'FO22FDY', '4 Romulus Court', 'HP112XA', 'Damian', 'Summerfield', 1872545189),
+(7, 'YF05DQR', '7 Mill Close', 'ME87FD', 'Isa', 'Durante', 2147483647),
+(8, 'YL31NLA', '31 Oaklands Crescent', 'CO153LL', 'Cyrus', 'Innes', 2147483647),
+(9, 'DR08XOQ', '7 Havenvale Court', 'DL117JY', 'Elly', 'Favreau', 2147483647),
+(10, 'NX19YMD', '6 Mabel Cottages', 'LE191YG', 'Louie', 'Paulsen', 1292122052),
+(11, 'VV48LHM', '5 Queens Close', 'LS83TH', 'Lukas', 'Kidd', 2147483647),
+(12, 'YG11VOA', 'Roselands Lodge', 'BN228PT', 'Sharon', 'Leighton', 2147483647);
 
 --
 -- Indexes for dumped tables
