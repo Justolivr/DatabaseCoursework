@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2024 at 03:55 PM
+-- Generation Time: Apr 09, 2024 at 05:02 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `dsservice` (
   `serviceID` int(6) UNSIGNED NOT NULL,
-  `empID` int(6) NOT NULL,
-  `regNo` varchar(7) NOT NULL,
+  `servicingemployee` int(6) UNSIGNED NOT NULL,
+  `servicedvehicle` varchar(7) NOT NULL,
   `dateLastServiced` date NOT NULL,
   `nextService` date NOT NULL,
   `problemdesc` varchar(500) DEFAULT NULL
@@ -40,7 +40,7 @@ CREATE TABLE `dsservice` (
 -- Dumping data for table `dsservice`
 --
 
-INSERT INTO `dsservice` (`serviceID`, `empID`, `regNo`, `dateLastServiced`, `nextService`, `problemdesc`) VALUES
+INSERT INTO `dsservice` (`serviceID`, `servicingemployee`, `servicedvehicle`, `dateLastServiced`, `nextService`, `problemdesc`) VALUES
 (1, 11, 'FO22FDY', '2023-04-11', '2024-04-11', 'car broken'),
 (7, 8, 'FO22FDY', '0000-00-00', '0000-00-00', 'headlight broken'),
 (8, 11, 'NB59JCT', '2023-07-30', '2024-07-30', 'noise when engine turned on'),
@@ -58,8 +58,8 @@ INSERT INTO `dsservice` (`serviceID`, `empID`, `regNo`, `dateLastServiced`, `nex
 --
 ALTER TABLE `dsservice`
   ADD PRIMARY KEY (`serviceID`),
-  ADD KEY `empID` (`empID`),
-  ADD KEY `regNo` (`regNo`);
+  ADD KEY `empID` (`servicingemployee`),
+  ADD KEY `regNo` (`servicedvehicle`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -70,6 +70,17 @@ ALTER TABLE `dsservice`
 --
 ALTER TABLE `dsservice`
   MODIFY `serviceID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `dsservice`
+--
+ALTER TABLE `dsservice`
+  ADD CONSTRAINT `service vehicle registration` FOREIGN KEY (`servicedvehicle`) REFERENCES `dscar` (`regNo`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `servicing employee` FOREIGN KEY (`servicingemployee`) REFERENCES `dsemployee` (`empID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

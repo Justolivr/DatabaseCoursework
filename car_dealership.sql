@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2024 at 03:55 PM
+-- Generation Time: Apr 09, 2024 at 04:59 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -70,7 +70,7 @@ INSERT INTO `dscar` (`regNo`, `make`, `brand`, `yearMade`, `price`) VALUES
 
 CREATE TABLE `dscustomer` (
   `customerID` int(6) NOT NULL,
-  `regNo` varchar(7) NOT NULL,
+  `customervehicle` varchar(7) NOT NULL,
   `address` varchar(50) NOT NULL,
   `postcode` varchar(7) NOT NULL,
   `firstname` varchar(50) DEFAULT NULL,
@@ -82,17 +82,17 @@ CREATE TABLE `dscustomer` (
 -- Dumping data for table `dscustomer`
 --
 
-INSERT INTO `dscustomer` (`customerID`, `regNo`, `address`, `postcode`, `firstname`, `surname`, `phoneNo`) VALUES
+INSERT INTO `dscustomer` (`customerID`, `customervehicle`, `address`, `postcode`, `firstname`, `surname`, `phoneNo`) VALUES
 (1, 'DC09YZQ', '4 Boot Hill Drive', 'ME87FD', 'Teresa', 'Wilkins', 217920370),
 (2, 'LO44REJ', '8 Tennyson Road', 'HP112XA', 'Merle', 'Herchs', 993099700),
 (3, 'VB02RQL', '5 Forest Lodge', 'TN3 9JP', 'Thomas', 'Castellano', 1317836167),
-(6, 'FO22FDY', '4 Romulus Court', 'HP112XA', 'Thomas', 'Castellano', 1872545189),
-(7, 'YF05DQR', '7 Mill Close', 'ME87FD', 'Thomas', 'Castellano', 2147483647),
-(8, 'YL31NLA', '31 Oaklands Crescent', 'CO153LL', 'Thomas', 'Castellano', 2147483647),
-(9, 'DR08XOQ', '7 Havenvale Court', 'DL117JY', 'Thomas', 'Castellano', 2147483647),
-(10, 'NX19YMD', '6 Mabel Cottages', 'LE191YG', 'Thomas', 'Castellano', 1292122052),
-(11, 'VV48LHM', '5 Queens Close', 'LS83TH', 'Thomas', 'Castellano', 2147483647),
-(12, 'YG11VOA', 'Roselands Lodge', 'BN228PT', 'Thomas', 'Castellano', 2147483647);
+(6, 'FO22FDY', '4 Romulus Court', 'HP112XA', 'Damian', 'Summerfield', 1872545189),
+(7, 'YF05DQR', '7 Mill Close', 'ME87FD', 'Isa', 'Durante', 2147483647),
+(8, 'YL31NLA', '31 Oaklands Crescent', 'CO153LL', 'Cyrus', 'Innes', 2147483647),
+(9, 'DR08XOQ', '7 Havenvale Court', 'DL117JY', 'Elly', 'Favreau', 2147483647),
+(10, 'NX19YMD', '6 Mabel Cottages', 'LE191YG', 'Louie', 'Paulsen', 1292122052),
+(11, 'VV48LHM', '5 Queens Close', 'LS83TH', 'Lukas', 'Kidd', 2147483647),
+(12, 'YG11VOA', 'Roselands Lodge', 'BN228PT', 'Sharon', 'Leighton', 2147483647);
 
 -- --------------------------------------------------------
 
@@ -132,7 +132,7 @@ INSERT INTO `dsemployee` (`empID`, `firstname`, `lastname`, `dateofbirth`, `gend
 --
 
 CREATE TABLE `dsmanager` (
-  `empID` int(6) NOT NULL,
+  `managedemployee` int(6) UNSIGNED NOT NULL,
   `manID` int(6) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -140,7 +140,7 @@ CREATE TABLE `dsmanager` (
 -- Dumping data for table `dsmanager`
 --
 
-INSERT INTO `dsmanager` (`empID`, `manID`) VALUES
+INSERT INTO `dsmanager` (`managedemployee`, `manID`) VALUES
 (1, 5),
 (8, 1),
 (11, 2),
@@ -155,9 +155,9 @@ INSERT INTO `dsmanager` (`empID`, `manID`) VALUES
 
 CREATE TABLE `dsorder` (
   `orderID` int(6) UNSIGNED NOT NULL,
-  `customerID` int(6) NOT NULL,
-  `empID` int(6) NOT NULL,
-  `regNo` varchar(7) DEFAULT NULL,
+  `purchasingcustomer` int(6) NOT NULL,
+  `transactionemployee` int(6) UNSIGNED NOT NULL,
+  `vehiclepurchased` varchar(7) NOT NULL,
   `totalPrice` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -165,13 +165,13 @@ CREATE TABLE `dsorder` (
 -- Dumping data for table `dsorder`
 --
 
-INSERT INTO `dsorder` (`orderID`, `customerID`, `empID`, `regNo`, `totalPrice`) VALUES
+INSERT INTO `dsorder` (`orderID`, `purchasingcustomer`, `transactionemployee`, `vehiclepurchased`, `totalPrice`) VALUES
 (1, 2, 1, 'LO44REJ', 2650),
 (2, 6, 5, 'FO22FDY', 6280),
 (3, 8, 10, 'YL31NLA', 8540),
-(4, 10, 11, 'NX19YM', 17200),
-(5, 7, 8, 'YF05DQ', 14120),
-(6, 1, 8, 'DC09YZ', 10350);
+(4, 10, 11, 'NX19YMD', 17200),
+(5, 7, 8, 'YF05DQR', 14120),
+(6, 1, 8, 'DC09YZQ', 10350);
 
 -- --------------------------------------------------------
 
@@ -181,8 +181,8 @@ INSERT INTO `dsorder` (`orderID`, `customerID`, `empID`, `regNo`, `totalPrice`) 
 
 CREATE TABLE `dsservice` (
   `serviceID` int(6) UNSIGNED NOT NULL,
-  `empID` int(6) NOT NULL,
-  `regNo` varchar(7) NOT NULL,
+  `servicingemployee` int(6) UNSIGNED NOT NULL,
+  `servicedvehicle` varchar(7) NOT NULL,
   `dateLastServiced` date NOT NULL,
   `nextService` date NOT NULL,
   `problemdesc` varchar(500) DEFAULT NULL
@@ -192,7 +192,7 @@ CREATE TABLE `dsservice` (
 -- Dumping data for table `dsservice`
 --
 
-INSERT INTO `dsservice` (`serviceID`, `empID`, `regNo`, `dateLastServiced`, `nextService`, `problemdesc`) VALUES
+INSERT INTO `dsservice` (`serviceID`, `servicingemployee`, `servicedvehicle`, `dateLastServiced`, `nextService`, `problemdesc`) VALUES
 (1, 11, 'FO22FDY', '2023-04-11', '2024-04-11', 'car broken'),
 (7, 8, 'FO22FDY', '0000-00-00', '0000-00-00', 'headlight broken'),
 (8, 11, 'NB59JCT', '2023-07-30', '2024-07-30', 'noise when engine turned on'),
@@ -216,7 +216,7 @@ ALTER TABLE `dscar`
 --
 ALTER TABLE `dscustomer`
   ADD PRIMARY KEY (`customerID`),
-  ADD UNIQUE KEY `regNo` (`regNo`);
+  ADD UNIQUE KEY `regNo` (`customervehicle`);
 
 --
 -- Indexes for table `dsemployee`
@@ -229,24 +229,24 @@ ALTER TABLE `dsemployee`
 --
 ALTER TABLE `dsmanager`
   ADD PRIMARY KEY (`manID`),
-  ADD KEY `empID` (`empID`);
+  ADD KEY `empID` (`managedemployee`);
 
 --
 -- Indexes for table `dsorder`
 --
 ALTER TABLE `dsorder`
   ADD PRIMARY KEY (`orderID`),
-  ADD KEY `regNo` (`regNo`),
-  ADD KEY `empID` (`empID`),
-  ADD KEY `customerID` (`customerID`);
+  ADD KEY `regNo` (`vehiclepurchased`),
+  ADD KEY `empID` (`transactionemployee`),
+  ADD KEY `customerID` (`purchasingcustomer`);
 
 --
 -- Indexes for table `dsservice`
 --
 ALTER TABLE `dsservice`
   ADD PRIMARY KEY (`serviceID`),
-  ADD KEY `empID` (`empID`),
-  ADD KEY `regNo` (`regNo`);
+  ADD KEY `empID` (`servicingemployee`),
+  ADD KEY `regNo` (`servicedvehicle`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -281,6 +281,37 @@ ALTER TABLE `dsorder`
 --
 ALTER TABLE `dsservice`
   MODIFY `serviceID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `dscustomer`
+--
+ALTER TABLE `dscustomer`
+  ADD CONSTRAINT `customer vehicle` FOREIGN KEY (`customervehicle`) REFERENCES `dscar` (`regNo`);
+
+--
+-- Constraints for table `dsmanager`
+--
+ALTER TABLE `dsmanager`
+  ADD CONSTRAINT `managed employee` FOREIGN KEY (`managedemployee`) REFERENCES `dsemployee` (`empID`);
+
+--
+-- Constraints for table `dsorder`
+--
+ALTER TABLE `dsorder`
+  ADD CONSTRAINT `purchasing customer` FOREIGN KEY (`purchasingcustomer`) REFERENCES `dscustomer` (`customerID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `transaction employee` FOREIGN KEY (`transactionemployee`) REFERENCES `dsemployee` (`empID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `vehicle purchased` FOREIGN KEY (`vehiclepurchased`) REFERENCES `dscar` (`regNo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `dsservice`
+--
+ALTER TABLE `dsservice`
+  ADD CONSTRAINT `service vehicle registration` FOREIGN KEY (`servicedvehicle`) REFERENCES `dscar` (`regNo`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `servicing employee` FOREIGN KEY (`servicingemployee`) REFERENCES `dsemployee` (`empID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

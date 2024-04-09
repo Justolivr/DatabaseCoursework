@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2024 at 01:53 PM
+-- Generation Time: Apr 09, 2024 at 05:01 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `dscustomer` (
   `customerID` int(6) NOT NULL,
-  `regNo` varchar(7) NOT NULL,
+  `customervehicle` varchar(7) NOT NULL,
   `address` varchar(50) NOT NULL,
   `postcode` varchar(7) NOT NULL,
   `firstname` varchar(50) DEFAULT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE `dscustomer` (
 -- Dumping data for table `dscustomer`
 --
 
-INSERT INTO `dscustomer` (`customerID`, `regNo`, `address`, `postcode`, `firstname`, `surname`, `phoneNo`) VALUES
+INSERT INTO `dscustomer` (`customerID`, `customervehicle`, `address`, `postcode`, `firstname`, `surname`, `phoneNo`) VALUES
 (1, 'DC09YZQ', '4 Boot Hill Drive', 'ME87FD', 'Teresa', 'Wilkins', 217920370),
 (2, 'LO44REJ', '8 Tennyson Road', 'HP112XA', 'Merle', 'Herchs', 993099700),
 (3, 'VB02RQL', '5 Forest Lodge', 'TN3 9JP', 'Thomas', 'Castellano', 1317836167),
@@ -62,7 +62,7 @@ INSERT INTO `dscustomer` (`customerID`, `regNo`, `address`, `postcode`, `firstna
 --
 ALTER TABLE `dscustomer`
   ADD PRIMARY KEY (`customerID`),
-  ADD UNIQUE KEY `regNo` (`regNo`);
+  ADD UNIQUE KEY `regNo` (`customervehicle`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -73,6 +73,16 @@ ALTER TABLE `dscustomer`
 --
 ALTER TABLE `dscustomer`
   MODIFY `customerID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `dscustomer`
+--
+ALTER TABLE `dscustomer`
+  ADD CONSTRAINT `customer vehicle` FOREIGN KEY (`customervehicle`) REFERENCES `dscar` (`regNo`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
