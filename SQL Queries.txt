@@ -1,0 +1,25 @@
+INSERT INTO dscar
+VALUES ("XD71IT9","Ford","Fiesta",2019,22000);
+
+INSERT INTO dsorder(purchasingcustomer,transactionemployee,vehiclepurchased,totalPrice)
+VALUES (7,9,"OD03CUK",10170);
+
+INSERT INTO dsservice(servicingemployee,servicedvehicle,dateLastServiced,nextService,problemdesc)
+VALUES (7,"OD03CUK",2022-10-01,2024-09-09,"no sound from radio");
+
+SELECT * FROM `dsservice` WHERE 1 ORDER BY dateLastServiced
+
+SELECT * FROM `dsmanager` WHERE 1 
+SELECT * FROM dsemployee, dsmanager WHERE empID = managerempID GROUP BY managerempID
+(second query is better version of second one)
+SELECT * FROM dsmanager INNER JOIN dsemployee ON dsmanager.managerempID=dsemployee.empID;
+(worse version of second version of query) (required in spec)
+
+
+SELECT * FROM 'dscar' WHERE 1 LIMIT 10
+
+
+SELECT * FROM dscar WHERE make IN ('Toyota', 'BMW', 'Mitsubishi');
+
+SELECT COUNT(*) FROM dscar WHERE make='Toyota' GROUP BY yearMade;
+(prints the counts of cars with the make toyota for each year made)
