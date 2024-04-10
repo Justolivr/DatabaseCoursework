@@ -41,17 +41,24 @@ mysqli_close($conn);
 ?>
 
 <h1> Enter your details to order a car</h1>
- <form action="createOrder.php">
+ <form action="createOrder.php" method="POST">
   <label for="regNo">Reg number of car to buy:</label><br>
   <input type="text" id="regNo" name="regNo"><br>
  <label for="address">Address:</label><br>
   <input type="text" id="address" name="address"><br>
+  
   <label for="postcode">postcode:</label><br>
   <input type="text" id="postcode" name="postcode"><br>
-  <label for="fname">First name:</label><br>
-  <input type="text" id="fname" name="fname"><br>
-  <label for="lname">Last name:</label><br>
-  <input type="text" id="lname" name="lname">
+
+  <label for="firstname">first name:</label><br>
+  <input type="text" id="firstname" name="firstname"><br>
+  
+  <label for="surname">last name:</label><br>
+  <input type="text" id="surname" name="surname"><br>
+  
+  <label for="phoneNo">phone No:</label><br>
+  <input type="text" id="phoneNo" name="phoneNo"><br>
+
   <br>
     <input type="submit" value="Submit">
 </form> 
@@ -62,5 +69,5 @@ mysqli_close($conn);
 
 
 
-
+</body>
 </html> 
