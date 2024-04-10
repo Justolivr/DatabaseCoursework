@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2024 at 05:02 PM
+-- Generation Time: Apr 10, 2024 at 04:49 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `car dealership`
+-- Database: `car_dealership`
 --
 
 -- --------------------------------------------------------
@@ -33,24 +33,25 @@ CREATE TABLE `dsemployee` (
   `lastname` varchar(12) NOT NULL,
   `dateofbirth` date DEFAULT NULL,
   `gender` enum('M','F') NOT NULL,
-  `salary` int(11) DEFAULT NULL
+  `salary` int(11) DEFAULT NULL,
+  `password` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `dsemployee`
 --
 
-INSERT INTO `dsemployee` (`empID`, `firstname`, `lastname`, `dateofbirth`, `gender`, `salary`) VALUES
-(1, 'Morgan', 'Christophers', '1984-12-01', 'M', 25600),
-(5, 'Quintina', 'Joly', '1935-08-01', 'M', 25600),
-(6, 'Thorvald', 'Kis', '1954-08-15', 'M', 34500),
-(7, 'Delilah', 'Irving', '1966-02-11', 'F', 27800),
-(8, 'Mario', 'Hassani', '2001-08-03', 'M', 1000000),
-(9, 'Carl', 'Sharma', '1971-09-03', 'M', 35000),
-(10, 'Claudia', 'Grünberg', '1987-06-22', 'F', 10600),
-(11, 'Godfrey', 'Lam', '1644-06-13', 'M', 3),
-(12, 'Ana', 'Christophers', '1975-04-10', 'F', 44000),
-(13, 'Anton', 'Chigurh', '1997-09-22', 'M', 500000);
+INSERT INTO `dsemployee` (`empID`, `firstname`, `lastname`, `dateofbirth`, `gender`, `salary`, `password`) VALUES
+(1, 'Morgan', 'Christophers', '1984-12-01', 'M', 25600, 'Rf8U8ehMqeTA2cC'),
+(5, 'Quintina', 'Joly', '1935-08-01', 'M', 25600, 'lsYt5YfCjsjQXP4'),
+(6, 'Thorvald', 'Kis', '1954-08-15', 'M', 34500, 'kZMzSCgpVXPi3zG'),
+(7, 'Delilah', 'Irving', '1966-02-11', 'F', 27800, 'Bx1ayJjVkKZdE4A'),
+(8, 'Mario', 'Hassani', '2001-08-03', 'M', 1000000, 'JZHD2rnkIAJdham'),
+(9, 'Carl', 'Sharma', '1971-09-03', 'M', 35000, '5yhkiTHNrOAOsTn'),
+(10, 'Claudia', 'Grünberg', '1987-06-22', 'F', 10600, 'mc013cgagFLTwv9'),
+(11, 'Godfrey', 'Lam', '1644-06-13', 'M', 3, 'pmMG25bdRbdxzc1'),
+(12, 'Ana', 'Christophers', '1975-04-10', 'F', 44000, 'CUrYDG3lSOE3PFQ'),
+(13, 'Anton', 'Chigurh', '1997-09-22', 'M', 500000, 'tQCZPZLz3hUMouq');
 
 --
 -- Indexes for dumped tables
