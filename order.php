@@ -1,4 +1,3 @@
-
 <html>
 <head>
 <title>Order cars</title>
@@ -24,7 +23,7 @@ die("Connection failed: " . mysqli_connect_error());
 
 $sql = "SELECT d.regNo, d.make, d.brand, d.yearMade, d.price 
         FROM dscar d
-        LEFT JOIN dscustomer c ON d.regNo = c.regNo
+        LEFT JOIN dscustomer c ON d.customerID = c.customerID
         WHERE c.customerID IS NULL";
 		
 $result = $conn->query($sql);
