@@ -1,4 +1,5 @@
 <?php
+//establish connection to phpMyAdmin database
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -10,6 +11,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+//receives text information from html form
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if form fields are set before accessing them
     if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['dateofbirth']) && isset($_POST['gender']) && isset($_POST['salary']) && isset($_POST['password'])) {
@@ -20,8 +22,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $salary = $_POST['salary'];
 		$password = $_POST['password'];
 
+	    //SQL insert query to insert user entered information into table
         $sql = "INSERT INTO dsemployee (firstname, lastname, dateofbirth, gender, salary, password) VALUES ('$firstname', '$lastname', '$dateofbirth', '$gender', '$salary', '$password')";
 
+	    //displays text based on whether query was successfully executed
         if (mysqli_query($conn, $sql)) {
             echo "New employee added successfully.";
         } else {
@@ -42,6 +46,7 @@ mysqli_close($conn);
 </head>
 <body>
     <h2>Add Employee</h2>
+	<!-- pass information from html form to php file for processing-->
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <label for="firstname">First Name:</label>
         <input type="text" id="firstname" name="firstname" required><br><br>
