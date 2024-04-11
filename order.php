@@ -58,6 +58,15 @@ mysqli_close($conn);
   <label for="phoneNo">phone No:</label><br>
   <input type="text" id="phoneNo" name="phoneNo"><br>
 
+<label for="price">price:</label><br>
+  <input type="text" id="price" name="price"><br>
+
+
+
+
+
+
+
   <br>
     <input type="submit" value="Submit">
 </form> 

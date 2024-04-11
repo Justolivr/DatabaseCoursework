@@ -29,52 +29,67 @@ $postcode = $_POST["postcode"];
 $firstname = $_POST["firstname"];
 $surname = $_POST["surname"];
 $phoneNo = $_POST["phoneNo"];
+$price = $_POST["price"];
 
-$sql = "INSERT INTO dscustomer (address, postcode, firstname, surname, phoneNo)
+$sql = "INSERT IGNORE INTO dscustomer (address, postcode, firstname, surname, phoneNo)
 VALUES ('$address', '$postcode', '$firstname', '$surname', '$phoneNo')";
 
-if (mysqli_query($conn, $sql)) {
-echo "New record inserted successfully";
-} else {
-echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
+$result = mysqli_query($conn, $sql);
 
 $sql2 = "SELECT customerID FROM dscustomer WHERE firstname = '$firstname' AND surname = '$surname'";
 
-// Execute the query
+
 $result = mysqli_query($conn, $sql2);
 
-// Check if the query returned any result
+
 if (mysqli_num_rows($result) > 0) {
-    // Fetch the result as an associative array
+    
     $row = mysqli_fetch_assoc($result);
 
-    // Store the value in a variable
     $variable = $row['customerID'];
 
-    // Do something with the variable
-    echo $variable;
+
 } else {
     echo "No results found";
 }
 
-        //UPDATE dscar SET dscar.customerID = 12 WHERE dscar.regNo = "YM04PFI"; 	
-
 $sql3 = "UPDATE dscar SET dscar.customerID = '$variable' WHERE dscar.regNo = '$regNo'";
 
-if (mysqli_query($conn, $sql3)) {
-echo "UPDATED successfully";
+$result = mysqli_query($conn, $sql3);
+
+$sql4 = "SELECT empID FROM dsemployee ORDER BY RAND() LIMIT 1";
+
+
+$result = mysqli_query($conn, $sql4);
+
+
+if (mysqli_num_rows($result) > 0) {
+    
+    $row = mysqli_fetch_assoc($result);
+
+    $randomID = $row['empID'];
+
 } else {
-echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    echo "No results found";
+
+
+
 }
 
 
+$sql5 = "INSERT IGNORE INTO dsorder (customerID, empID, regNo, totalPrice) VALUES ('$variable', '$randomID', '$regNo', '$price')";
+
+
+$result = mysqli_query($conn, $sql5);
+
+}
 mysqli_close($conn);
-}
-
-
 ?>
 
+<h1> Thanks for choosing Ching's Cars </h1>
+<p> your order has been placed </p>
+
+<img src="celica.gif" alt="celica">
 
 </body>
 </html> 
