@@ -10,8 +10,11 @@
 
 <img src="celica.gif" alt="celica">
  
+ 
+ 
+
 <?php 
-/*
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -23,12 +26,15 @@ if (!$conn) {
 die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "SELECT d.regNo, d.make, d.brand, d.yearMade, d.price 
-        FROM dscar d
-        LEFT JOIN dscustomer c ON d.regNo = c.customervehicle
-        WHERE c.customerID IS NULL";
+
+
+$sql = "SELECT * FROM dscar  ORDER BY PRICE DESC LIMIT 5";
 		
 $result = $conn->query($sql);
+
+
+echo "<br>";
+echo "Heres a selection of our cars we think you'd might like:";
 
 echo"<table border = '1'";
 echo"<tr><td>Make</td><td>Brand</td><td>Year Manufactured</td><td>Price</td><tr>";
@@ -40,7 +46,7 @@ echo"<tr><td>{$row['make']}</td><td>{$row['brand']}</td><td>{$row['yearMade']}</
 echo "</table>";
 mysqli_close($conn);
 	
-	*/
+	
 ?>
 
 
