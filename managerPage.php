@@ -38,7 +38,8 @@ mysqli_close($conn);
  <a href="updateCars.php">Add or remove a new car to the dealership</a>
  <p> Help customers:</p>
  <a href="order.php">Help a customer order a car</a> 
- <a href="service.php">Book a customer's car in for a service</a> 
+ <br><a href="service.php">Book a customer's car in for a service</a> 
+ <br><a href="updateCars.php">Add or remove a new car to the dealership</a
  <p>Community functions: </p>
  <a href ="updateEmployees.php">View all employees, Add new employees, or remove old gangly employees</a>
   <br>

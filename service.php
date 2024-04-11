@@ -50,6 +50,9 @@
 	<label for="nextService">next service date (consult your vehicle handbook):</label><br>
 	<input type="date" id="nextService" name="nextService"><br>
 	
+	<label for="problemdesc">Describe the problem with your car:</label><br>
+	<input type="text" id="problemdesc" name="problemdesc"><br>
+	
 	<input type="submit" value="Submit">
 </form>
 

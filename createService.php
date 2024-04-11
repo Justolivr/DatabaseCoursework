@@ -5,13 +5,14 @@
 </head>
 <body>
 
+<h1>Ching's cars </h1>
 
 <?php
 
 $regNo = $_POST["regNo"];
 $dateLastServiced = $_POST["dateLastServiced"];
 $nextService = $_POST["nextService"];
-
+$problemdesc = $_POST["problemdesc"];
 
 $servername = 'localhost';
 $username = 'root';
@@ -39,14 +40,14 @@ if (mysqli_num_rows($result) > 0) {
 
 }
 
-echo $regNo;
-echo "<br>";
-echo $randomID;
-echo "<br>";
-echo $dateLastServiced;
-echo "<br>";
-echo $nextService;
+$sql = "INSERT IGNORE INTO dsservice (empID,regNo,dateLastServiced,nextService,problemdesc)
+VALUES ('$randomID', '$regNo', '$dateLastServiced','$nextService','$problemdesc')";
 
+if (mysqli_query($conn, $sql)) {
+echo "New record inserted successfully";
+} else {
+echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
 
 
 mysqli_close($conn);
