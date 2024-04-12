@@ -12,6 +12,7 @@
     <label for="regNo">Select your car's reg number:</label>
     <select name="regNo" id="regNo">
         <?php
+		//establish connection to database
         $servername = 'localhost';
         $username = 'root';
         $password = '';
@@ -22,10 +23,11 @@
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
-
+		//selects reg numbers in ascending order
         $sql = "SELECT regNo FROM dscar ORDER BY dscar.regNo ASC";
         $result = mysqli_query($conn, $sql);
 
+		//format result into table
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<option value='" . $row['regNo'] . "'>" . $row['regNo'] . "</option>";

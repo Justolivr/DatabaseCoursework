@@ -1,4 +1,6 @@
 <?php
+
+//establish connection to database
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -17,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (isset($_POST['confirm'])) {
-        // Remove the selected car from the database
+        // remove the selected car from the database
         $sql_deleteCar = "DELETE FROM dscar WHERE regNo='$selectedRegNo'";
         if (mysqli_query($conn, $sql_deleteCar)) {
             echo "Car removed successfully.";
@@ -46,10 +48,12 @@ mysqli_close($conn);
             if (!$conn) {
                 die("Connection failed: " . mysqli_connect_error());
             }
-
+			
+			//displays reg numbers of cars to be removed which are not currently owned by anyone
             $sql = "SELECT regNo FROM dscar WHERE customerID IS NULL ORDER BY model ASC";
             $result = mysqli_query($conn, $sql);
 
+			//format sql result into drop down menu
             while ($row = mysqli_fetch_assoc($result)) {
                 $selected = ($row['regNo'] == $selectedRegNo) ? 'selected' : '';
                 echo "<option value='" . $row['regNo'] . "' $selected>" . $row['regNo'] . "</option>";
@@ -65,7 +69,7 @@ mysqli_close($conn);
             if (!$conn) {
                 die("Connection failed: " . mysqli_connect_error());
             }
-
+			//select car with matching reg number
             $sql_carDetails = "SELECT * FROM dscar WHERE regNo='$selectedRegNo'";
             $result_carDetails = mysqli_query($conn, $sql_carDetails);
 
@@ -74,6 +78,7 @@ mysqli_close($conn);
                 ?>
                 <label for="carDetails">Car Details:</label><br>
                 <table border="1">
+				<!-- displays data about the car to be removed -->
                     <tr>
                         <td>Brand:</td>
                         <td><?php echo $row_carDetails['brand']; ?></td>

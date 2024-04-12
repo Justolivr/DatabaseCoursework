@@ -7,7 +7,7 @@
 <p>The following cars are due to be serviced</p>
 
 <?php
-
+//establish connection to database
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -19,11 +19,13 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+//displays information about services
 $sql = "SELECT dsservice.serviceID, dsservice.regNo, dsservice.dateLastServiced, dsservice.nextService, dsservice.problemDesc, dsemployee.firstname, dsemployee.lastname, dscustomer.firstname AS customer_firstname, dscustomer.lastname AS customer_lastname, dscustomer.phoneNo FROM dsservice INNER JOIN dsemployee ON dsservice.empID = dsemployee.empID INNER JOIN dscar ON dsservice.regNo = dscar.regNo INNER JOIN dscustomer ON dscar.customerID = dscustomer.customerID";
 
 		
 $result = mysqli_query($conn, $sql);
 
+//format sql result into table
 echo "<table border='1'>";
 echo "<tr><td>Service ID</td><td>Reg Number</td><td>Date Last Serviced</td><td>Next Service</td><td>Problem Description</td><td>Employee Name</td><td>Customer Name</td><td>Phone Number</td></tr>";
 

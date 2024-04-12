@@ -4,6 +4,7 @@
 </head>
 <body>
     <h1>Login as an employee or manager</h1>
+	<!-- form data is sent to php code in file for processing -->
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <div class="container">
             <label for="employeeID"><b>Employee ID</b></label>
@@ -22,9 +23,9 @@
     </form>
 
     <?php
-    // PHP code for authentication
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Establish a connection to your database
+        //establish connection into database
         $db_host = "localhost";
         $db_user = "root";
         $db_pass = "";
@@ -36,36 +37,35 @@
             die("Connection failed: " . mysqli_connect_error());
         }
 
-        // Retrieve values entered in the form fields
+		//input html form data into variables
         $empID = $_POST['employeeID'];
         $password = $_POST['employeePassword'];
-
-        // Query your database to check if the employee is a manager
+		
+		//check if employee is manager
         $sql_manager = "SELECT empID FROM dsmanager WHERE empID = '$empID'";
         $result_manager = mysqli_query($conn, $sql_manager);
 
-        // Check if the employee is a manager
+        // if employee is manager, redirect to manager page
         if (mysqli_num_rows($result_manager) == 1) {
-            // Authentication successful for a manager, redirect to manager page
             header("Location: managerPage.php");
             exit();
         }
 
-        // Query your database to check for a matching record in the employee table
+        //check if login details match details stored in database
         $sql_employee = "SELECT * FROM dsemployee WHERE empID = '$empID' AND password = '$password'";
         $result_employee = mysqli_query($conn, $sql_employee);
 
-        // Check if any rows were returned
+        
         if (mysqli_num_rows($result_employee) == 1) {
-            // Authentication successful for an employee, redirect to employee page
+            //redirects for employees
             header("Location: employeePage.php");
             exit();
         } else {
-            // Invalid credentials, display error message
+            // invalid credentials, display error message
             echo "<p style='color: red;'>Invalid username or password. Please try again.</p>";
         }
 
-        // Close the database connection
+       
         mysqli_close($conn);
     }
     ?>

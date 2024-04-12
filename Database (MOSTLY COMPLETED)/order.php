@@ -9,7 +9,7 @@
 
 
 <?php 
-
+//establish connection to database
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -21,6 +21,7 @@ if (!$conn) {
 die("Connection failed: " . mysqli_connect_error());
 }
 
+//displays all cars which are not owned by customers
 $sql = "SELECT d.regNo, d.model, d.brand, d.yearMade, d.price 
         FROM dscar d
         LEFT JOIN dscustomer c ON d.customerID = c.customerID
@@ -28,6 +29,7 @@ $sql = "SELECT d.regNo, d.model, d.brand, d.yearMade, d.price
 		
 $result = $conn->query($sql);
 
+//format sql result into table
 echo"<table border = '1'";
 echo"<tr><td>Reg Number</td><td>Model</td><td>Brand</td><td>Year Manufactured</td><td>Price</td><tr>";
 while($row = mysqli_fetch_array($result))
@@ -40,6 +42,7 @@ mysqli_close($conn);
 ?>
 
 <h1> Enter your details to order a car</h1>
+<!-- recieve information to be processed in php form -->
  <form action="createOrder.php" method="POST">
   <label for="regNo">Reg number of car to buy:</label><br>
   <input type="text" id="regNo" name="regNo"><br>

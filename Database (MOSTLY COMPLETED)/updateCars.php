@@ -8,6 +8,7 @@
     <p>Here are all of the cars listed by the dealership:</p>
 
     <?php
+	//establish connection to database
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -19,14 +20,15 @@
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    // Query for cars owned by customers
+    // query for cars owned by customers
     $sql_owned = "SELECT dscar.*, dscustomer.* FROM dscar INNER JOIN dscustomer ON dscar.customerID = dscustomer.customerID ORDER BY dscar.brand ASC";
     $result_owned = mysqli_query($conn, $sql_owned);
 
-    // Query for cars not owned by customers
+    // query for cars not owned by customers
     $sql_not_owned = "SELECT * FROM dscar WHERE customerID IS NULL ORDER BY model ASC";
     $result_not_owned = mysqli_query($conn, $sql_not_owned);
 
+	//format sql result into table
     echo "<h2>Cars Owned by Customers:</h2>";
     echo "<table border='1'>";
     echo "<tr><td>Reg Number</td><td>Brand</td><td>Model</td><td>Year Manufactured</td><td>Price</td><td>Customer Name</td><td>Customer Address</td><td>Customer Postcode</td><td>Customer Phone</td></tr>";
@@ -36,7 +38,7 @@
     }
 
     echo "</table>";
-
+	//format sql result into table
     echo "<h2>Cars Not Owned by Customers:</h2>";
     echo "<table border='1'>";
     echo "<tr><td>Reg Number</td><td>Brand</td><td>Model</td><td>Year Manufactured</td><td>Price</td></tr>";
@@ -47,7 +49,7 @@
 
     echo "</table>";
 
-    // Query to count the total number of cars in the dealership grouped by brand
+    // query to count the total number of cars in the dealership grouped by brand
     $sql_count_cars_by_brand = "SELECT brand, COUNT(*) AS num_cars FROM dscar GROUP BY brand";
     $result_count_cars_by_brand = mysqli_query($conn, $sql_count_cars_by_brand);
 

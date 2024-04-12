@@ -7,6 +7,7 @@
 <p>Here is the list of all of the cars registered with the dealership:</p>
 <?php
 
+//establish connection to database
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -18,10 +19,13 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+
+//selects all cars from database in ascending order
 $sql = "SELECT * FROM dscar ORDER BY model ASC"; 
 		
 $result = mysqli_query($conn, $sql);
 
+//format sql result into table
 echo "<table border='1'>";
 echo "<tr><td>Brand</td><td>Model</td><td>Year Manufactured</td><td>Price</td></tr>";
 

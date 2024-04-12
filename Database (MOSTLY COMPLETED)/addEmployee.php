@@ -48,6 +48,8 @@ mysqli_close($conn);
     <h2>Add Employee</h2>
 	<!-- pass information from html form to php file for processing-->
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+	
+	<!-- recieve employee details to insert -->
         <label for="firstname">First Name:</label>
         <input type="text" id="firstname" name="firstname" required><br><br>
 

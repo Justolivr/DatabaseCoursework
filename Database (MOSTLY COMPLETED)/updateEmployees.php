@@ -6,7 +6,7 @@
 <h1>Welcome to the Employee Settings!</h1>
 <p>Here is the list of all of the employees:</p>
 <?php
-
+//establish connection to database
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -18,10 +18,12 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+//selects all employees in database
 $sql = "SELECT * FROM dsemployee ORDER BY empID ASC"; 
 		
 $result = mysqli_query($conn, $sql);
 
+//format sql result into table
 echo "<table border='1'>";
 echo "<tr><td>Employee ID</td><td>First Name</td><td>Last Name</td><td>Date of Birth</td><td>Gender</td><td>Salary</td></tr>";
 
@@ -35,6 +37,7 @@ mysqli_close($conn);
 
 
 ?>
+<!-- recieve user information-->
 <form action="addEmployee.php" method="post">
     <button type="submit">Add New Employee</button>
 </form>

@@ -8,11 +8,13 @@
 
 <?php
 
+//store html information into variables
 $regNo = isset($_POST["regNo"]) ? $_POST["regNo"] : "";
 $dateLastServiced = isset($_POST["dateLastServiced"]) ? $_POST["dateLastServiced"] : "";
 $nextService = isset($_POST["nextService"]) ? $_POST["nextService"] : "";
 $problemDesc = isset($_POST["problemDesc"]) ? $_POST["problemDesc"] : "";
 
+//establish connection to database
 $servername = 'localhost';
 $username = 'root';
 $password = '';
@@ -20,6 +22,7 @@ $database = 'car_dealership';
 
 $conn = mysqli_connect($servername, $username, $password, $database);
 
+//select a random employee to carry out the service and assign to variable randomID
 $sql = "SELECT empID FROM dsemployee ORDER BY RAND() LIMIT 1";
 
 
@@ -36,6 +39,7 @@ if (mysqli_num_rows($result) > 0) {
     echo "No results found";
 }
 
+//insert data into service table
 $sql = "INSERT IGNORE INTO dsservice (empID,regNo,dateLastServiced,nextService,problemDesc)
 VALUES ('$randomID', '$regNo', '$dateLastServiced','$nextService','$problemDesc')";
 

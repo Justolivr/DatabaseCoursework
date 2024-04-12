@@ -1,7 +1,8 @@
 <?php 
-
+//recieve html information to process
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+//establish connection to database
     $servername = 'localhost';
     $username = 'root';
     $password = '';
@@ -23,12 +24,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     $phoneNo = $_POST["phoneNo"];
     $price = $_POST["price"];
+	
+	//insert customer details into customer table
 
     $sql = "INSERT IGNORE INTO dscustomer (address, postcode, firstname, lastname, phoneNo)
             VALUES ('$address', '$postcode', '$firstname', '$lastname', '$phoneNo')";
 
     $result = mysqli_query($conn, $sql);
 
+
+	//recieve customerID from customer table and store in variable
     $sql2 = "SELECT customerID FROM dscustomer WHERE firstname = '$firstname' AND lastname = '$lastname'";
 
     $result = mysqli_query($conn, $sql2);
@@ -39,7 +44,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "No results found";
     }
-
+	
+	//update customerID in car table to link a car to a new owner
     $sql3 = "UPDATE dscar SET dscar.customerID = '$variable' WHERE dscar.regNo = '$regNo'";
     $result = mysqli_query($conn, $sql3);
 
@@ -53,6 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "No results found";
     }
 
+	//inserts order into table
     $sql5 = "INSERT IGNORE INTO dsorder (customerID, empID, regNo, price) VALUES ('$variable', '$randomID', '$regNo', '$price')";
     $result = mysqli_query($conn, $sql5);
 

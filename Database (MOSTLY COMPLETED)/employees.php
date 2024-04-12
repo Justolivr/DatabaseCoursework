@@ -10,7 +10,7 @@
 
 
 <?php
-
+//establish connection to database
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -22,9 +22,11 @@ if (!$conn) {
 die("Connection failed: " . mysqli_connect_error());
 }
 
+//selects all cars from database
 $sql = "SELECT * FROM dscar";
 $result = $conn->query($sql);
 
+//format query result into table
 echo"<table border = '1'";
 echo"<tr><td>Make</td><td>Brand</td><td>Year Manufactured</td><td>Price</td><tr>";
 while($row = mysqli_fetch_array($result))

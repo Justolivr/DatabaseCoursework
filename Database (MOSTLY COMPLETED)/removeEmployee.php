@@ -18,16 +18,18 @@
         <input type="submit" value="Remove Employee">
     </form>
 
-    <!-- Link back to manager menu -->
+  
     <a href="updateEmployees.php">TAKE ME BACK!</a>
 
 <?php
+//recieve html data from form to process
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['password'])) {
         $firstname = $_POST['firstname'];
         $lastname = $_POST['lastname'];
         $userPassword = $_POST['password'];
 
+		//establish onnection to database
         $servername = "localhost";
         $username = "root";
         $dbPassword = "";
@@ -39,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             die("Connection failed: " . mysqli_connect_error());
         }
 
-        // Check if the employee exists and the password is correct
+        // check if the employee exists and the password is correct
         $sql = "SELECT * FROM dsemployee WHERE firstname = '$firstname' AND lastname = '$lastname'";
         $result = mysqli_query($conn, $sql);
 
@@ -48,16 +50,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $storedPassword = $row['password'];
             $empID = $row['empID'];
 
-            // Verify the password
+            
             if ($userPassword === $storedPassword) {
-                // Check if the employee is a manager
+                // check if the employee is a manager
                 $managerCheckSql = "SELECT * FROM dsmanager WHERE manID = $empID";
                 $managerCheckResult = mysqli_query($conn, $managerCheckSql);
 
                 if (mysqli_num_rows($managerCheckResult) > 0) {
                     echo "This employee is a manager. Managers cannot be removed.";
                 } else {
-                    // Password matched and employee is not a manager, proceed with deletion
+                    // delete if user is not a manager and password is correct
                     $delete_sql = "DELETE FROM dsemployee WHERE empID = $empID";
 
                     if (mysqli_query($conn, $delete_sql)) {
